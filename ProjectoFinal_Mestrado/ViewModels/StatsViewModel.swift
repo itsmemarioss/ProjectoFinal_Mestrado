@@ -1,5 +1,4 @@
 
-
 import Foundation
 import CoreLocation
 
@@ -8,12 +7,11 @@ var stats = StatsViewModel()
 class StatsViewModel : ObservableObject {
    
     //Variáveis para a fazer update StatsView
-    var speed = 0.0
-    var duration = "00:00:00"
-    var distance = 0.0
-    var calories = 0.0
-    var avg_speed = 0.0
-    
+    @Published var speed = 0.0
+    @Published var duration = "00:00:00"
+    @Published var avg_speed = 0.0
+    @Published var distance = 0.0
+    @Published var calories = 0.0
     
     /**
       Coordenadas por onde o utilizador passou
@@ -23,18 +21,53 @@ class StatsViewModel : ObservableObject {
     /**
      Data de inicio de treino (Quando clica no play)
     */
-    var startDate : Date?
+    var startDate : Date = Date()
+    
+    // Variáveis auxiliares
+    var accumulatedSpeed = 0.0
+    let formatter = DateFormatter()
+    
+    
+    init(speed: Double = 0.0, duration: String = "00:00:00", avg_speed: Double = 0.0, distance: Double = 0.0, calories: Double = 0.0, accumulatedSpeed: Double = 0.0, locations: [CLLocation] = []) {
+        self.speed = speed
+        self.duration = duration
+        self.avg_speed = avg_speed
+        self.distance = distance
+        self.calories = calories
+        self.accumulatedSpeed = accumulatedSpeed
+        self.locations = locations
+        
+        formatter.dateFormat = "HH:mm:ss"
+    }
+    
     
     /**
      Está função é chamada sempre que ocorre uma actualização na posição do utilizador
      O Objecto CLLocation contêm as informações relevantes sobre as coordenas geografica, altitude, heading e velocidade
     */
     func updatePosition(_ p: CLLocation){
+        
+        let timeElapsed = p.timestamp.timeIntervalSince(startDate)
+        let currentDate = Date(timeIntervalSinceReferenceDate: timeElapsed)
+        
+        // adiciona a localização atual no array
+        locations.append(p)
+        accumulatedSpeed = accumulatedSpeed + p.speed
+        
+        //Actualiza o valor das variáveis
+        DispatchQueue.main.async {
+            self.getSpeed(speed: p.speed)
+            self.getDuration(newDate: currentDate)
+            self.getAvgSpeed()
+            self.calcDistance()
+            self.calcCalories( timeElapsed: timeElapsed/60.0 )
+        }
     }
+    
     
     //Função chamada quando o treino é iniciado ou sai da pausa
     func startWorkout(){
-        
+        startDate =  Date()
     }
     
     //Função chamada quando o treino termina
@@ -47,17 +80,16 @@ class StatsViewModel : ObservableObject {
         
     }
     
-    
     /**
         Função para calcular a velocidade .
         Deve actualizar a variavel speed com a nova velocidade.
         Esta função é chamada sempre que existe um update na localizacao.
         Dica: Na lista de localizacoes (var locations) os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
-    func getSpeed(){
-    
-    
+    func getSpeed(speed: Double){
+        self.speed = speed
     }
+    
     /**
         Função para calcular a velocidade  média.
         Deve actualizar a variavel average_speed com a nova velocidade media.
@@ -65,9 +97,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getAvgSpeed(){
-        
-       
-        
+        self.avg_speed = self.accumulatedSpeed / Double(self.locations.count)
     }
     
     /**
@@ -77,10 +107,14 @@ class StatsViewModel : ObservableObject {
         Dica: O CLLocation contêm um método .distance(from: CLLocation) que devolve a distância de uma coordenada a outra em Metros
      */
     func calcDistance(){
-
+        // só calcula a distância quando há pelo menos duas locations
+        if locations.count > 1 {
+            let lastLocation = self.locations[locations.count - 1]
+            let previousLocation = self.locations[locations.count - 2]
+            self.distance += lastLocation.distance(from: previousLocation)
+        }
+        
     }
-   
-    
     
     /**
         Função para calcular a duracao do treino .
@@ -88,9 +122,8 @@ class StatsViewModel : ObservableObject {
         Esta função é chamada sempre que existe um update na localizacao.
         Dica: Na lista de localizacoes (var locations) os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
-    func getDuration(){
-        
-      
+    func getDuration(newDate: Date){
+        self.duration = formatter.string(from: newDate)
         
     }
     
@@ -102,7 +135,9 @@ class StatsViewModel : ObservableObject {
      Consultar o website para obter a formula matemática que permite o cálculo das calorias gastas:
      https://www.hss.edu/conditions_burning-calories-with-exercise-calculating-estimated-energy-expenditure.asp
      */
-    func calcCalories(){
+    func calcCalories(timeElapsed: Double){
+        // Energy expenditure (calories/minute) = .0175 x MET (from table) x weight (in kilograms)
+        self.calories += (0.175 * 8.0 * 75) / timeElapsed ;
        
     }
     
