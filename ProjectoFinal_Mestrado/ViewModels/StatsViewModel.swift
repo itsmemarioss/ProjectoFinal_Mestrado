@@ -60,7 +60,7 @@ class StatsViewModel : ObservableObject {
             self.getDuration(newDate: currentDate)
             self.getAvgSpeed()
             self.calcDistance()
-            self.calcCalories( timeElapsed: timeElapsed/60.0 )
+            self.calcCalories( timeElapsed: timeElapsed )
         }
     }
     
@@ -87,7 +87,8 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes (var locations) os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getSpeed(speed: Double){
-        self.speed = speed
+        // TODO create a config page to select m/s vs Km/h, weight ?
+        self.speed = speed * 3.6
     }
     
     /**
@@ -97,7 +98,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getAvgSpeed(){
-        self.avg_speed = self.accumulatedSpeed / Double(self.locations.count)
+        self.avg_speed = (self.accumulatedSpeed / Double(self.locations.count)) * 3.6
     }
     
     /**
@@ -111,7 +112,7 @@ class StatsViewModel : ObservableObject {
         if locations.count > 1 {
             let lastLocation = self.locations[locations.count - 1]
             let previousLocation = self.locations[locations.count - 2]
-            self.distance += lastLocation.distance(from: previousLocation)
+            self.distance += lastLocation.distance(from: previousLocation) / 1000
         }
         
     }
@@ -135,9 +136,9 @@ class StatsViewModel : ObservableObject {
      Consultar o website para obter a formula matemática que permite o cálculo das calorias gastas:
      https://www.hss.edu/conditions_burning-calories-with-exercise-calculating-estimated-energy-expenditure.asp
      */
-    func calcCalories(timeElapsed: Double){
+    func calcCalories(timeElapsed: TimeInterval){
         // Energy expenditure (calories/minute) = .0175 x MET (from table) x weight (in kilograms)
-        self.calories += (0.175 * 8.0 * 75) / timeElapsed ;
+        self.calories += (0.175 * 8.0 * 75) * (timeElapsed / 3600);
        
     }
     

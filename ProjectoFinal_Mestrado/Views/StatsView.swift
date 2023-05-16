@@ -11,16 +11,53 @@ struct StatsView: View {
            
            Image("running-background") .resizable()
            
-           VStack(alignment: .center, spacing: 0){
-               Text("Speed: \(statsobs.speed)")
-               Text("Duration: \(statsobs.duration)")
-               Text("Avg. Speed: \(statsobs.avg_speed)")
-               Text("Distance: \(statsobs.distance)")
-               Text("Calories: \(statsobs.calories)")
+           VStack(alignment: .center, spacing: 10){
+               
+               HStack(spacing: 5) {
+                   VStack(alignment: .center, spacing: 10){
+                       Text(String(format: "%.2f Km/h", statsobs.speed)).font(.headline).colorInvert()
+                       Text("Speed").font(.subheadline).colorInvert()
+                   }
+                   .padding()
+                   .background(Color.gray.opacity(0.5))
+                   
+                   VStack(alignment: .center, spacing: 10){
+                       Text(String(format: "%.2f Km/h", statsobs.avg_speed)).font(.headline).colorInvert()
+                       Text("Avg. Speed").font(.subheadline).colorInvert()
+                   }
+                   .padding()
+                   .background(Color.gray.opacity(0.5))
+                   
+                   
+               }
+               
+               VStack(alignment: .center, spacing: 10){
+                   Text("\(statsobs.duration)").font(.headline).colorInvert()
+                   Text("Elapsed time").font(.subheadline).colorInvert()
+               }
+               .padding()
+               .background(Color.gray.opacity(0.5))
+               
+               HStack(spacing: 10) {
+                   VStack(alignment: .center, spacing: 10){
+                       Text(String(format: "%.2f Km", statsobs.distance) ).font(.headline).colorInvert()
+                       Text("Distance").font(.subheadline).colorInvert()
+                   }
+                   .padding()
+                   .background(Color.gray.opacity(0.5))
+                   
+                   VStack(alignment: .center){
+                       Text(String(format: "%.2f ",statsobs.calories)).font(.headline).colorInvert()
+                       Text("cal").font(.headline).font(.subheadline).colorInvert()
+                   }
+                   .padding()
+                   .background(Color.gray.opacity(0.5))
+                   
+               }
                
                
            }
-           .background(Color.white)
+           
            
            
        }.ignoresSafeArea()
