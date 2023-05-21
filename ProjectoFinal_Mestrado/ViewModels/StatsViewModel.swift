@@ -77,6 +77,7 @@ class StatsViewModel : ObservableObject {
     func stopWorkout(){
         active = false
         // TODO: save data for future analysis
+        cleanData()
     }
     
     //Função para colocar o treino em pausa
@@ -154,6 +155,17 @@ class StatsViewModel : ObservableObject {
      */
     func getSpeedUnit() -> Double {
         return profile.useKmH() ? 3.6 : 1
+    }
+    
+    func cleanData(){
+        self.locations = []
+        DispatchQueue.main.async {
+            self.distance = 0
+            self.speed = 0
+            self.avg_speed = 0
+            self.calories = 0
+            self.duration = "00:00:00"
+        }
     }
     
 }

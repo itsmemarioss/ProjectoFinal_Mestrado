@@ -340,6 +340,8 @@
 				DEVELOPMENT_TEAM = M4MQS4W4YS;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ProjectoFinal_Mestrado/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sports App";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -362,6 +364,8 @@
 				DEVELOPMENT_TEAM = M4MQS4W4YS;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ProjectoFinal_Mestrado/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sports App";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
