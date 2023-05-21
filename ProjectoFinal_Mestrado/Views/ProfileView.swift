@@ -10,12 +10,12 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var weight: Double = profile.getWeight()
-    @State var speed: String = profile.getSpeedUnit()
-    @State var distance: String = profile.getDistanceUnit()
+    @State var useKmH: Bool = profile.useKmH()
+    @State private var selectedOption = 0
     
     // Save data to UserDefaults
     func saveData() {
-        profile.saveData(weight: weight, speedUnit: speed, distanceUnit: distance)
+        profile.saveData(weight: weight, useKmH: useKmH)
     }
     
     var body: some View {
@@ -27,14 +27,21 @@ struct ProfileView: View {
                 TextField("Type your weight", value: $weight, formatter: NumberFormatters.twoFractionDigits)
             }
             
-            HStack(alignment: .center, spacing: 16) {
-                Text("Distance unit")
-                TextField("Chose distance", text: $distance)
-            }
-         
-            HStack(alignment: .center, spacing: 16) {
-                Text("Speed unit")
-                TextField("Chose speed", text: $speed)
+            
+            Group {
+                Toggle(isOn: Binding(
+                    get: { self.useKmH == true },
+                    set: { self.useKmH = $0 ? true : false }
+                )) {
+                    Text("Use Km/h")
+                }
+                
+                Toggle(isOn: Binding(
+                    get: { self.useKmH == false },
+                    set: { self.useKmH = $0 ? false : true }
+                )) {
+                    Text("Use m/s")
+                }
             }
             
             Button("Save"){

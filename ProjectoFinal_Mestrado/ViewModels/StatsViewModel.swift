@@ -87,8 +87,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes (var locations) os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getSpeed(speed: Double){
-        // TODO create a config page to select m/s vs Km/h, weight ?
-        self.speed = speed * 3.6
+        self.speed = speed * getSpeedUnit()
     }
     
     /**
@@ -98,7 +97,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getAvgSpeed(){
-        self.avg_speed = (self.accumulatedSpeed / Double(self.locations.count)) * 3.6
+        self.avg_speed = (self.accumulatedSpeed / Double(self.locations.count)) * getSpeedUnit()
     }
     
     /**
@@ -135,12 +134,22 @@ class StatsViewModel : ObservableObject {
 
      Consultar o website para obter a formula matemática que permite o cálculo das calorias gastas:
      https://www.hss.edu/conditions_burning-calories-with-exercise-calculating-estimated-energy-expenditure.asp
+     
+     Energy expenditure (calories/minute) = .0175 x MET (from table) x weight (in kilograms)
      */
     func calcCalories(timeElapsed: TimeInterval){
-        // Energy expenditure (calories/minute) = .0175 x MET (from table) x weight (in kilograms)
+        // recupara peso do usuário das configurações
         var weight = profile.getWeight()
         self.calories += (0.175 * 8.0 * weight) * (timeElapsed / 3600);
        
+    }
+    
+    /**
+        Essa função retorna a taxa de conversão para Km/h de acordo com as configurações do usuário.
+        O GPS retorna os dados em m/s, se não for preciso converter mantem se o mesmo valor.
+     */
+    func getSpeedUnit() -> Double {
+        return profile.useKmH() ? 3.6 : 1
     }
     
 }

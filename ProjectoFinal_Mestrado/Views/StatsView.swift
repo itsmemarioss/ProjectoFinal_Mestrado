@@ -3,11 +3,14 @@ import SwiftUI
 struct StatsView: View {
     
     @ObservedObject var statsobs = stats
-    
+    @ObservedObject var profileobs = profile
     
     var body: some View {
         
-       ZStack(){
+        var unit = profileobs.useKmH() ? "km/h" : "m/s"
+        var formatString = "%.2f \(unit)"
+        
+        ZStack(){
            
            Image("running-background") .resizable()
            
@@ -15,14 +18,14 @@ struct StatsView: View {
                
                HStack(spacing: 5) {
                    VStack(alignment: .center, spacing: 10){
-                       Text(String(format: "%.2f Km/h", statsobs.speed)).font(.headline).colorInvert()
+                       Text(String(format: formatString, statsobs.speed)).font(.headline).colorInvert()
                        Text("Speed").font(.subheadline).colorInvert()
                    }
                    .padding()
                    .background(Color.gray.opacity(0.5))
                    
                    VStack(alignment: .center, spacing: 10){
-                       Text(String(format: "%.2f Km/h", statsobs.avg_speed)).font(.headline).colorInvert()
+                       Text(String(format: formatString, statsobs.avg_speed)).font(.headline).colorInvert()
                        Text("Avg. Speed").font(.subheadline).colorInvert()
                    }
                    .padding()
@@ -54,11 +57,7 @@ struct StatsView: View {
                    .background(Color.gray.opacity(0.5))
                    
                }
-               
-               
            }
-           
-           
            
        }.ignoresSafeArea()
             

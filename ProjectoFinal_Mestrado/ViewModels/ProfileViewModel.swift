@@ -12,15 +12,13 @@ var profile = ProfileViewModel()
 class ProfileViewModel: ObservableObject  {
     
     public let WEIGHT_KEY = "weightKey"
-    public let SPEED_KEY = "speedKey"
-    public let DISTANCE_KEY = "distanceKey"
+    public let USE_KM_H_KEY = "useKmHKey"
     
     // Save data to UserDefaults
-    func saveData(weight: Double, speedUnit: String, distanceUnit: String) {
+    func saveData(weight: Double, useKmH: Bool) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(weight, forKey: WEIGHT_KEY)
-        userDefaults.set(speedUnit, forKey: SPEED_KEY)
-        userDefaults.set(distanceUnit, forKey: DISTANCE_KEY)
+        userDefaults.set(useKmH, forKey: USE_KM_H_KEY)
         userDefaults.synchronize()
     }
     
@@ -28,12 +26,9 @@ class ProfileViewModel: ObservableObject  {
         return UserDefaults.standard.double(forKey: WEIGHT_KEY)
     }
     
-    func getSpeedUnit() -> String {
-        return UserDefaults.standard.string(forKey: SPEED_KEY) ?? "Km"
+    func useKmH() -> Bool {
+        return UserDefaults.standard.bool(forKey: USE_KM_H_KEY);
     }
     
-    func getDistanceUnit() -> String {
-        return UserDefaults.standard.string(forKey: DISTANCE_KEY) ?? "Km/h"
-    }
 }
 
