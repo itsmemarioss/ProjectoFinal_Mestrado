@@ -22,7 +22,7 @@ class StatsViewModel : ObservableObject {
      Data de inicio de treino (Quando clica no play)
     */
     var startDate : Date = Date()
-    
+    var active : Bool = false;
     // Variáveis auxiliares
     var accumulatedSpeed = 0.0
     let formatter = DateFormatter()
@@ -67,12 +67,16 @@ class StatsViewModel : ObservableObject {
     
     //Função chamada quando o treino é iniciado ou sai da pausa
     func startWorkout(){
-        startDate =  Date()
+        if !active {
+            startDate =  Date()
+            active = true;
+        }
     }
     
     //Função chamada quando o treino termina
     func stopWorkout(){
-        
+        active = false
+        // TODO: save data for future analysis
     }
     
     //Função para colocar o treino em pausa
@@ -139,7 +143,7 @@ class StatsViewModel : ObservableObject {
      */
     func calcCalories(timeElapsed: TimeInterval){
         // recupara peso do usuário das configurações
-        var weight = profile.getWeight()
+        let weight = profile.getWeight()
         self.calories += (0.175 * 8.0 * weight) * (timeElapsed / 3600);
        
     }
