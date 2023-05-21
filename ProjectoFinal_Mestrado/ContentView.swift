@@ -13,7 +13,12 @@ struct ContentView: View {
                 Image(systemName: "map")
                 Text("Map")
             }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        }
+            ProfileView().tabItem {
+                Image(systemName: "person")
+                Text("Profile")
+            }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            
+        }.background(Color.white.opacity(0.5))
     }
 }
 

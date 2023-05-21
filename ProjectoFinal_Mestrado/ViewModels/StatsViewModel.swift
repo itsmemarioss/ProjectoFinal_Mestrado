@@ -138,7 +138,8 @@ class StatsViewModel : ObservableObject {
      */
     func calcCalories(timeElapsed: TimeInterval){
         // Energy expenditure (calories/minute) = .0175 x MET (from table) x weight (in kilograms)
-        self.calories += (0.175 * 8.0 * 75) * (timeElapsed / 3600);
+        var weight = profile.getWeight()
+        self.calories += (0.175 * 8.0 * weight) * (timeElapsed / 3600);
        
     }
     
