@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		26960C022A16994100109AAC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960C012A16994100109AAC /* ProfileView.swift */; };
 		26960C042A17E62A00109AAC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960C032A17E62A00109AAC /* ProfileViewModel.swift */; };
+		57D9321F2A1C05B4007D17F1 /* profile_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57D9321E2A1C05B4007D17F1 /* profile_background.jpg */; };
 		6477532A25A49E43004CD26C /* ProjectoFinal_MestradoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6477532925A49E43004CD26C /* ProjectoFinal_MestradoApp.swift */; };
 		6477532C25A49E43004CD26C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6477532B25A49E43004CD26C /* ContentView.swift */; };
 		6477532E25A49E44004CD26C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6477532D25A49E44004CD26C /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		26960C012A16994100109AAC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26960C032A17E62A00109AAC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		57D9321E2A1C05B4007D17F1 /* profile_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_background.jpg; sourceTree = "<group>"; };
 		6477532625A49E43004CD26C /* ProjectoFinal_Mestrado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectoFinal_Mestrado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6477532925A49E43004CD26C /* ProjectoFinal_MestradoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectoFinal_MestradoApp.swift; sourceTree = "<group>"; };
 		6477532B25A49E43004CD26C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		64A0B05C25A4DF46004EC4D8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				57D9321E2A1C05B4007D17F1 /* profile_background.jpg */,
 				64A0B06225A4E883004EC4D8 /* Montserrat-Black.ttf */,
 				64A0B05F25A4E09B004EC4D8 /* Montserrat-Italic.ttf */,
 			);
@@ -189,6 +192,7 @@
 				64A0B06325A4E883004EC4D8 /* Montserrat-Black.ttf in Resources */,
 				6477533125A49E44004CD26C /* Preview Assets.xcassets in Resources */,
 				6477532E25A49E44004CD26C /* Assets.xcassets in Resources */,
+				57D9321F2A1C05B4007D17F1 /* profile_background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +346,7 @@
 				INFOPLIST_FILE = ProjectoFinal_Mestrado/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sports App";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -366,7 +370,7 @@
 				INFOPLIST_FILE = ProjectoFinal_Mestrado/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sports App";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
