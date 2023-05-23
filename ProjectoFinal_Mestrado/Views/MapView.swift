@@ -4,7 +4,8 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @ObservedObject var l = location
+    @ObservedObject var l: LocationViewModel
+    @ObservedObject var stats: StatsViewModel
     
     @State private var timer: Timer?
     @State var button = "play.fill"
@@ -12,6 +13,11 @@ struct MapView: View {
     @State var infoMessage = ""
     @State var strokeColor = Color(red: 70/255, green: 148/255, blue: 70/255)
     @State var progress : CGFloat = 0.0
+    
+    init(locationVM: LocationViewModel, stats: StatsViewModel){
+        self.l = locationVM
+        self.stats = stats
+    }
     
     var body: some View {
         ZStack{
@@ -102,9 +108,3 @@ struct MapView: View {
     
 }
 
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
-    }
-}

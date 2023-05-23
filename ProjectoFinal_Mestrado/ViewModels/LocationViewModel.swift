@@ -5,18 +5,16 @@ import Foundation
 //1º Passo importar a biblioteca
 import CoreLocation
 
-//Instancia global
-var location = LocationViewModel()
-
 class LocationViewModel : NSObject, ObservableObject{
-    var manager : CLLocationManager?
+    
     @Published var locations: [CLLocationCoordinate2D] = []
     
+    var manager : CLLocationManager?
     var lastLocation : CLLocation?
-    
-    
-    
-    override init(){
+    var stats: StatsViewModel
+       
+    init(stats: StatsViewModel) {
+        self.stats = stats
         super.init()
         //2ºPasso instaciar o location manager
         manager = CLLocationManager()

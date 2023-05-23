@@ -1,10 +1,13 @@
 
 import Foundation
 import CoreLocation
-
-var stats = StatsViewModel()
+import SwiftUI
+import CoreData
 
 class StatsViewModel : ObservableObject {
+    
+    // variavel com o contexto do core data
+    private (set) var context: NSManagedObjectContext
    
     //Variáveis para a fazer update StatsView
     @Published var speed = 0.0
@@ -23,23 +26,15 @@ class StatsViewModel : ObservableObject {
     */
     var startDate : Date = Date()
     var active : Bool = false;
+    
     // Variáveis auxiliares
     var accumulatedSpeed = 0.0
     let formatter = DateFormatter()
     
-    
-    init(speed: Double = 0.0, duration: String = "00:00:00", avg_speed: Double = 0.0, distance: Double = 0.0, calories: Double = 0.0, accumulatedSpeed: Double = 0.0, locations: [CLLocation] = []) {
-        self.speed = speed
-        self.duration = duration
-        self.avg_speed = avg_speed
-        self.distance = distance
-        self.calories = calories
-        self.accumulatedSpeed = accumulatedSpeed
-        self.locations = locations
-        
+    init(context: NSManagedObjectContext) {
+        self.context = context
         formatter.dateFormat = "HH:mm:ss"
     }
-    
     
     /**
      Está função é chamada sempre que ocorre uma actualização na posição do utilizador
@@ -76,8 +71,7 @@ class StatsViewModel : ObservableObject {
     //Função chamada quando o treino termina
     func stopWorkout(){
         active = false
-        // TODO: save data for future analysis
-        cleanData()
+        saveData()
     }
     
     //Função para colocar o treino em pausa
@@ -166,6 +160,27 @@ class StatsViewModel : ObservableObject {
             self.calories = 0
             self.duration = "00:00:00"
         }
+    }
+    
+    private func saveData() {
+        
+        let newItem = RunEntity(context: context)
+        newItem.elapsedTime = self.duration
+        newItem.distance = self.distance
+        newItem.avgSpeed = self.avg_speed
+        newItem.calories = self.calories
+        
+
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        
+        cleanData()
     }
     
 }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		26960C022A16994100109AAC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960C012A16994100109AAC /* ProfileView.swift */; };
 		26960C042A17E62A00109AAC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960C032A17E62A00109AAC /* ProfileViewModel.swift */; };
+		26EFDCB22A1D330C002EA270 /* Run.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 26EFDCB02A1D330C002EA270 /* Run.xcdatamodeld */; };
+		26EFDCB42A1D337C002EA270 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFDCB32A1D337C002EA270 /* PersistenceController.swift */; };
+		26EFDCB62A1D33BC002EA270 /* RunsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFDCB52A1D33BC002EA270 /* RunsView.swift */; };
 		57D9321F2A1C05B4007D17F1 /* profile_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57D9321E2A1C05B4007D17F1 /* profile_background.jpg */; };
 		6477532A25A49E43004CD26C /* ProjectoFinal_MestradoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6477532925A49E43004CD26C /* ProjectoFinal_MestradoApp.swift */; };
 		6477532C25A49E43004CD26C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6477532B25A49E43004CD26C /* ContentView.swift */; };
@@ -26,6 +29,9 @@
 /* Begin PBXFileReference section */
 		26960C012A16994100109AAC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26960C032A17E62A00109AAC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		26EFDCB12A1D330C002EA270 /* Run.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Run.xcdatamodel; sourceTree = "<group>"; };
+		26EFDCB32A1D337C002EA270 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		26EFDCB52A1D33BC002EA270 /* RunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsView.swift; sourceTree = "<group>"; };
 		57D9321E2A1C05B4007D17F1 /* profile_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_background.jpg; sourceTree = "<group>"; };
 		6477532625A49E43004CD26C /* ProjectoFinal_Mestrado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectoFinal_Mestrado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6477532925A49E43004CD26C /* ProjectoFinal_MestradoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectoFinal_MestradoApp.swift; sourceTree = "<group>"; };
@@ -76,11 +82,13 @@
 				6477533A25A49E5E004CD26C /* Models */,
 				6477533925A49E58004CD26C /* Views */,
 				6477532925A49E43004CD26C /* ProjectoFinal_MestradoApp.swift */,
+				26EFDCB32A1D337C002EA270 /* PersistenceController.swift */,
 				6477532B25A49E43004CD26C /* ContentView.swift */,
 				64A0B05C25A4DF46004EC4D8 /* Fonts */,
 				6477532D25A49E44004CD26C /* Assets.xcassets */,
 				6477533225A49E44004CD26C /* Info.plist */,
 				6477532F25A49E44004CD26C /* Preview Content */,
+				26EFDCB02A1D330C002EA270 /* Run.xcdatamodeld */,
 			);
 			path = ProjectoFinal_Mestrado;
 			sourceTree = "<group>";
@@ -100,6 +108,7 @@
 				6477534025A49E85004CD26C /* StatsView.swift */,
 				64E4EB7425A4F4FE00D1C791 /* CustomMapView.swift */,
 				26960C012A16994100109AAC /* ProfileView.swift */,
+				26EFDCB52A1D33BC002EA270 /* RunsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,9 +212,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EFDCB62A1D33BC002EA270 /* RunsView.swift in Sources */,
 				26960C022A16994100109AAC /* ProfileView.swift in Sources */,
+				26EFDCB22A1D330C002EA270 /* Run.xcdatamodeld in Sources */,
 				6477534125A49E85004CD26C /* StatsView.swift in Sources */,
 				6477532C25A49E43004CD26C /* ContentView.swift in Sources */,
+				26EFDCB42A1D337C002EA270 /* PersistenceController.swift in Sources */,
 				26960C042A17E62A00109AAC /* ProfileViewModel.swift in Sources */,
 				6477534725A49EA9004CD26C /* StatsViewModel.swift in Sources */,
 				6477533D25A49E75004CD26C /* MapView.swift in Sources */,
@@ -404,6 +416,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		26EFDCB02A1D330C002EA270 /* Run.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				26EFDCB12A1D330C002EA270 /* Run.xcdatamodel */,
+			);
+			currentVersion = 26EFDCB12A1D330C002EA270 /* Run.xcdatamodel */;
+			path = Run.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6477531E25A49E43004CD26C /* Project object */;
 }

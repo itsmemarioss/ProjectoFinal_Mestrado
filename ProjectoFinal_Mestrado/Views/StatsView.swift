@@ -2,13 +2,17 @@ import SwiftUI
 
 struct StatsView: View {
     
-    @ObservedObject var statsobs = stats
+    @ObservedObject var statsobs: StatsViewModel
     @ObservedObject var profileobs = profile
+    
+    init(statsobs: StatsViewModel) {
+        self.statsobs = statsobs
+    }
     
     var body: some View {
         
-        var unit = profileobs.useKmH() ? "km/h" : "m/s"
-        var formatString = "%.2f \(unit)"
+        let unit = profileobs.useKmH() ? "km/h" : "m/s"
+        let formatString = "%.2f \(unit)"
         
         ZStack(){
            
@@ -71,8 +75,9 @@ struct StatsView: View {
     }
 }
 
+
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsView()
+        StatsView(statsobs: StatsViewModel(context:  PersistenceController.preview.container.viewContext))
     }
 }

@@ -4,7 +4,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    init() {
+    private var statusVM: StatsViewModel
+    private var locationVM: LocationViewModel
+    
+    init(statusVM: StatsViewModel) {
+        self.statusVM = statusVM
+        self.locationVM = LocationViewModel(stats: statusVM)
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = UIColor.blue
     }
@@ -13,21 +18,26 @@ struct ContentView: View {
         
         TabView{
             
-            StatsView().tabItem {
+            StatsView(statsobs: statusVM).tabItem {
                 Image(systemName: "figure.walk")
                 Text("Stats")
             }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
-            MapView().tabItem {
+            MapView(locationVM: locationVM, stats: statusVM).tabItem {
                 Image(systemName: "map")
                 Text("Map")
             }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            
             
             ProfileView().tabItem {
                 Image(systemName: "person")
                 Text("Profile")
             }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            
+            RunsView().tabItem {
+                Image(systemName: "list.dash")
+                Text("Runs")
+            }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                
             
         }
         .accentColor(.black)
@@ -36,6 +46,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(statusVM: StatsViewModel(context: PersistenceController.preview.container.viewContext))
+            
     }
 }
