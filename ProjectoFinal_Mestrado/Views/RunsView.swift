@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct RunsView: View {
+    @ObservedObject var profileobs = profile
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -23,11 +25,11 @@ struct RunsView: View {
                 ForEach(items) { item in
                     NavigationLink {
                         Text("Elapsed time: \(item.elapsedTime!)")
-                        Text("Avg Speed: \(item.avgSpeed)")
-                        Text("Distance: \(item.distance)")
-                        Text("Calories: \(item.calories)")
+                        Text(String(format: "Avg Speed: " + profileobs.stringFormat(), item.avgSpeed))
+                        Text(String(format: "Distance: %.2f Km", item.distance))
+                        Text(String(format: "Calories: %.2f", item.calories))
                     } label: {
-                        Text(String(format: "Distance: %.2f", item.distance))
+                        Text(String(format: "Distance: " + profileobs.stringFormat(), item.distance))
                         Text(item.elapsedTime!)
                     }
                 }

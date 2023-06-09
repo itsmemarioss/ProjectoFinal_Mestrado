@@ -86,7 +86,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes (var locations) os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getSpeed(speed: Double){
-        self.speed = speed * getSpeedUnit()
+        self.speed = speed * profile.getSpeedUnit()
     }
     
     /**
@@ -96,7 +96,7 @@ class StatsViewModel : ObservableObject {
         Dica: Na lista de localizacoes os objectos têm informação sobre a velocidade com que o user passou pelo ponto
      */
     func getAvgSpeed(){
-        self.avg_speed = (self.accumulatedSpeed / Double(self.locations.count)) * getSpeedUnit()
+        self.avg_speed = (self.accumulatedSpeed / Double(self.locations.count)) * profile.getSpeedUnit()
     }
     
     /**
@@ -141,14 +141,6 @@ class StatsViewModel : ObservableObject {
         let weight = profile.getWeight()
         self.calories += (0.175 * 8.0 * weight) * (timeElapsed / 3600);
        
-    }
-    
-    /**
-        Essa função retorna a taxa de conversão para Km/h de acordo com as configurações do usuário.
-        O GPS retorna os dados em m/s, se não for preciso converter mantem se o mesmo valor.
-     */
-    func getSpeedUnit() -> Double {
-        return profile.useKmH() ? 3.6 : 1
     }
     
     func cleanData(){

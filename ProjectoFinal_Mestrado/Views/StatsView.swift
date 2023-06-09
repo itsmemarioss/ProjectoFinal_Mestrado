@@ -11,9 +11,6 @@ struct StatsView: View {
     
     var body: some View {
         
-        let unit = profileobs.useKmH() ? "km/h" : "m/s"
-        let formatString = "%.2f \(unit)"
-        
         ZStack(){
            
            Image("running-background") .resizable()
@@ -23,7 +20,7 @@ struct StatsView: View {
                HStack(spacing: 5) {
                    
                    VStack(alignment: .center, spacing: 10){
-                       Text(String(format: formatString, statsobs.speed)).font(.headline).colorInvert()
+                       Text(String(format: profileobs.stringFormat(), statsobs.speed)).font(.headline).colorInvert()
                        Text("Speed").font(.subheadline).colorInvert().bold()
                    }
                    .frame(width: 150)                   .padding()
@@ -31,7 +28,7 @@ struct StatsView: View {
                    .cornerRadius(10)
                    
                    VStack(alignment: .center, spacing: 10){
-                       Text(String(format: formatString, statsobs.avg_speed)).font(.headline).colorInvert()
+                       Text(String(format: profileobs.stringFormat(), statsobs.avg_speed)).font(.headline).colorInvert()
                        Text("Avg. Speed").font(.subheadline).colorInvert().bold()
                    }
                    .frame(width: 150)                   .padding()
