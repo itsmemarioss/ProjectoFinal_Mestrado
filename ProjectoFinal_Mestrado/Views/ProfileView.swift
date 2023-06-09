@@ -42,7 +42,7 @@ struct ProfileView: View {
                
                 HStack(alignment: .center, spacing: 16) {
                     
-                    Text("Weight").foregroundColor(Color.white).bold()
+                    Text("Weight (Kg)").foregroundColor(Color.white).bold()
                     
                     TextField("Type your weight",
                         value: $weight, formatter:NumberFormatters.twoFractionDigits)
