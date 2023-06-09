@@ -10,8 +10,6 @@ struct ContentView: View {
     init(statusVM: StatsViewModel) {
         self.statusVM = statusVM
         self.locationVM = LocationViewModel(stats: statusVM)
-        UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().barTintColor = UIColor.blue
     }
     
     var body: some View {
